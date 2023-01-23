@@ -5,7 +5,6 @@
     "author": "David Plugge",
     "license": "MIT",
     "keywords": [
-        "web-api",
         "formdata",
         "types"
     ],
