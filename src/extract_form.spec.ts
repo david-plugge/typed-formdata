@@ -11,7 +11,6 @@ test('extractFormData', () => {
     formdata.append('array[]', new Blob(['b']));
 
     const { data, fields, files } = extractFormData(formdata);
-    console.log(data);
 
     expect(data.field).toBe('value');
     expect(data.file).toBeInstanceOf(Blob);
