@@ -9,7 +9,7 @@ concurrency:
     group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
     cancel-in-progress: true
 
-job:
+jobs:
     build:
         runs-on: ubuntu-latest
         steps:
