@@ -47,7 +47,7 @@ type MyForm = {
 
 ### Fields
 
-You can use the `fields` helper to create your input names:
+Use the `fields` helper to create your input names:
 
 ```ts
 <script lang="ts">
