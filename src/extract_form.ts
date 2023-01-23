@@ -43,16 +43,18 @@ export function extractFormData<T = any>(
     const fields: any = {};
     const files: any = {};
 
-    for (const [key, rawValue] of formData.entries()) {
-        const isFile = rawValue instanceof Blob;
-        const isField = typeof rawValue === 'string';
-        const value: any =
+    for (const [key, value] of formData.entries()) {
+        const isFile = value instanceof Blob;
+        const isField = typeof value === 'string';
+
+        if (
             // empty file
-            (isFile && rawValue.size === 0) ||
+            (isFile && value.size === 0) ||
             // empty string
-            (isField && rawValue === '')
-                ? undefined
-                : rawValue;
+            (isField && value === '')
+        ) {
+            continue;
+        }
 
         set(data, key, value);
         if (isField) set(fields, key, value);

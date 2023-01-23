@@ -7,24 +7,16 @@ export function set(obj: any, path: string, value: unknown) {
 
         if (!next) {
             if (type === 'index' && key === -1) {
-                if (typeof value !== 'undefined') {
-                    obj.push(value);
-                }
+                obj.push(value);
             } else {
                 obj[key] = value;
             }
-            // if (Array.isArray(obj[key])) {
-            //     obj[key] = Array.from(obj[key]);
-            // }
             return;
         }
 
         if (!obj[key]) {
             obj[key] = next.type === 'index' ? [] : {};
         }
-        // else if (next.type === 'index') {
-        //     obj[key] = Array.from(obj[key]);
-        // }
 
         obj = obj[key];
     }
