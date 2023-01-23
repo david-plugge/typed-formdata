@@ -17,18 +17,24 @@ jobs:
               with:
                   version: 7
 
-            - uses: actions/setup-node@v3
+            - name: Set up Node
+              uses: actions/setup-node@v3
               with:
                   node-version: 16.x
                   cache: pnpm
 
-            - run: pnpm install --frozen-lockfile
+            - run: |
+                  pnpm install --frozen-lockfile
+                  pnpm run build
 
-            - name: Create Release Pull Request or Publish
+            - name: Create a release
               id: changesets
               uses: changesets/action@v1
               with:
-                  publish: pnpm run build
+                  version: pnpm ci:version
+                  commit: 'chore: update version'
+                  title: 'chore: update version'
+                  publish: pnpm ci:release
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

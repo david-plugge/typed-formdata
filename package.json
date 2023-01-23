@@ -18,7 +18,8 @@
         "lint": "tsc",
         "format": "prettier --write .",
         "test": "vitest",
-        "changeset": "changeset"
+        "ci:version": "changeset version",
+        "ci:release": "changeset publish"
     },
     "devDependencies": {
         "@changesets/cli": "^2.26.0",
