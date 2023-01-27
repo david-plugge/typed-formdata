@@ -12,21 +12,31 @@ type FieldName = string & {
     valueOf(): string;
 };
 
-type _Field<T> = {
+type Field<T> = {
     [K in keyof T]: T[K] extends unknown[]
-        ? (
-              index?: number,
-          ) => T[K][number] extends FormDataEntryValue
-              ? FieldName
-              : _Field<T[K][number]>
+        ? T[K][number] extends FormDataEntryValue
+            ? (index?: number) => FieldName
+            : (index: number) => Field<T[K][number]>
         : T[K] extends FormDataEntryValue
         ? FieldName
-        : _Field<T[K]>;
+        : Field<T[K]>;
 };
 
-type Field<T> = _Field<ReplaceValue<T, FormDataEntryValue>>;
+// type Field<T> = {
+//     [K in keyof T]: T[K] extends unknown[]
+//         ? (
+//               index?: number,
+//           ) => T[K][number] extends FormDataEntryValue
+//               ? FieldName
+//               : Field<T[K][number]>
+//         : T[K] extends FormDataEntryValue
+//         ? FieldName
+//         : Field<T[K]>;
+// };
 
-export function field<T>(): Field<T> {
+type Fields<T> = Field<ReplaceValue<T, FormDataEntryValue>>;
+
+export function fields<T>(): Fields<T> {
     return new Proxy(
         {},
         {
