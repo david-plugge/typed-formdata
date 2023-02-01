@@ -1,5 +1,12 @@
 # typed-formdata
 
+## 0.0.6
+
+### Patch Changes
+
+-   4c868a8: update readme
+-   b2aed39: add repository
+
 ## 0.0.5
 
 ### Patch Changes
