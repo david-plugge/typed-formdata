@@ -22,19 +22,13 @@ type Field<T> = {
         : Field<T[K]>;
 };
 
-// type Field<T> = {
-//     [K in keyof T]: T[K] extends unknown[]
-//         ? (
-//               index?: number,
-//           ) => T[K][number] extends FormDataEntryValue
-//               ? FieldName
-//               : Field<T[K][number]>
-//         : T[K] extends FormDataEntryValue
-//         ? FieldName
-//         : Field<T[K]>;
-// };
+type DeepRequired<T> = T extends Record<string, unknown>
+    ? {
+          [K in keyof T]-?: DeepRequired<T[K]>;
+      }
+    : T;
 
-type Fields<T> = Field<ReplaceValue<T, FormDataEntryValue>>;
+type Fields<T> = Field<ReplaceValue<DeepRequired<T>, FormDataEntryValue>>;
 
 export function fields<T>(): Fields<T> {
     return new Proxy(

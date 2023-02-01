@@ -3,7 +3,7 @@ import { fields } from './fields';
 
 test('fields', () => {
     type Data = {
-        object: {
+        object?: {
             key: string;
         };
         array: Array<string>;
