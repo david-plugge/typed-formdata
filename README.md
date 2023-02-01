@@ -1,6 +1,6 @@
 # typed-formdata
 
-![npm](https://img.shields.io/npm/v/typed-formdata)
+[![npm](https://img.shields.io/npm/v/typed-formdata)](https://www.npmjs.com/package/typed-formdata)
 ![GitHub top language](https://img.shields.io/github/languages/top/david-plugge/typed-formdata)
 ![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/david-plugge/typed-formdata/main.yaml?branch=main)
 
@@ -22,6 +22,10 @@ pnpm i typed-formdata
 # yarn
 yarn add typed-formdata
 ```
+
+## Examples
+
+-   [SvelteKit](https://github.com/david-plugge/typed-formdata/tree/main/examples/sveltekit)
 
 ## Usage
 
