@@ -1,6 +1,6 @@
 {
     "name": "typed-formdata",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Add types to your FormData!",
     "author": "David Plugge",
     "license": "MIT",
