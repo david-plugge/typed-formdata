@@ -46,6 +46,7 @@ export function extractFormData<T = any>(
     for (const [key, value] of formData.entries()) {
         const isFile = value instanceof Blob;
         const isField = typeof value === 'string';
+        let val: FormDataEntryValue | undefined = value;
 
         if (
             // empty file
@@ -53,12 +54,12 @@ export function extractFormData<T = any>(
             // empty string
             (isField && value === '')
         ) {
-            continue;
+            val = undefined;
         }
 
-        set(data, key, value);
-        if (isField) set(fields, key, value);
-        if (isFile) set(files, key, value);
+        set(data, key, val);
+        if (isField) set(fields, key, val);
+        if (isFile) set(files, key, val);
     }
     fillHoles(data);
     fillHoles(fields);
