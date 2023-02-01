@@ -1,5 +1,11 @@
 # typed-formdata
 
+## 0.0.5
+
+### Patch Changes
+
+-   5d9b2e6: Exclude unnecessary files from package
+
 ## 0.0.4
 
 ### Patch Changes
