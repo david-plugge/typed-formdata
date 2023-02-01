@@ -1,5 +1,12 @@
 # typed-formdata
 
+## 0.0.4
+
+### Patch Changes
+
+-   e31029e: Set empty fields and files to undefined instead of omitting them
+-   e31029e: Utilize deep-required for fields helper
+
 ## 0.0.3
 
 ### Patch Changes
