@@ -3,6 +3,10 @@
     "version": "0.0.5",
     "description": "Add types to your FormData!",
     "author": "David Plugge",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/david-plugge/typed-formdata"
+    },
     "license": "MIT",
     "keywords": [
         "formdata",
