@@ -1,5 +1,11 @@
 # typed-formdata
 
+## 0.0.7
+
+### Patch Changes
+
+-   54e79bf: fix field helper issue when encountering optional values
+
 ## 0.0.6
 
 ### Patch Changes
