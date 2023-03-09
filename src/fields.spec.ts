@@ -9,7 +9,7 @@ test('fields', () => {
         array: Array<string>;
         arrayNested: Array<{
             string: string;
-            date: Date;
+            date: string;
         }>;
     };
 
