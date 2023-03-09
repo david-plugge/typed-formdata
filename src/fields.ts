@@ -22,13 +22,15 @@ type Field<T> = {
         : Field<T[K]>;
 };
 
-type DeepRequired<T> = T extends Record<string, unknown>
+type DeepRequired<T> = T extends Array<infer U>
+    ? Array<DeepRequired<U>>
+    : T extends object
     ? {
-          [K in keyof T]-?: DeepRequired<T[K]>;
+          [P in keyof T]-?: DeepRequired<T[P]>;
       }
-    : T;
+    : Exclude<T, undefined | null>;
 
-type Fields<T> = Field<ReplaceValue<DeepRequired<T>, FormDataEntryValue>>;
+type Fields<T> = Field<ReplaceValue<DeepRequired<T>, FieldName>>;
 
 export function fields<T>(): Fields<T> {
     return new Proxy(

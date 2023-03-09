@@ -29,7 +29,6 @@ function parsePath(str: string) {
     const parsed: ParsedSegment[] = [];
 
     let key = '';
-    let isIndex = false;
     for (let i = 0; i < str.length; i++) {
         if (str.charCodeAt(i) === 46 /* . */) {
             if (key !== '') {
@@ -49,7 +48,6 @@ function parsePath(str: string) {
                 });
                 key = '';
             }
-            isIndex = true;
             continue;
         }
         if (str.charCodeAt(i) === 93 /* ] */) {
@@ -58,7 +56,6 @@ function parsePath(str: string) {
                 key: key ? parseInt(key) : -1,
             });
             key = '';
-            isIndex = false;
             continue;
         }
         key += str[i];
