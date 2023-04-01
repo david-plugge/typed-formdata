@@ -1,4 +1,5 @@
 import { expect, test } from 'vitest';
+import { asBool, asNum, asStr } from './codecs';
 import { fields } from './fields';
 
 test('fields', () => {
@@ -22,3 +23,23 @@ test('fields', () => {
         'arrayNested[2].date',
     );
 });
+
+test('fields with codec', () => {
+    type Data = {
+        object?: {
+            key: string;
+        };
+        isActive: boolean;
+        arrayNested: Array<{
+            id: number;
+        }>;
+    };
+
+    const f = fields<Data>();
+
+    expect(asBool(f.isActive), 'nested object').toBe('isActive:boolean');
+    expect(asStr(f.object.key), 'nested object').toBe('object.key:string');
+    expect(asNum(f.arrayNested(2).id), 'nested array').toBe(
+        'arrayNested[2].id:number',
+    );
+})

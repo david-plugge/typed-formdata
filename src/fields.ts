@@ -1,24 +1,33 @@
-type ReplaceValue<T, V> = T extends Record<string, unknown>
+type ReplaceValue<T> = T extends Record<string, unknown>
     ? {
-          [K in keyof T]: ReplaceValue<T[K], V>;
+          [K in keyof T]: ReplaceValue<T[K]>;
       }
     : T extends Array<infer A>
-    ? Array<ReplaceValue<A, V>>
-    : V;
+    ? Array<ReplaceValue<A>>
+    : T extends FieldName<infer V>
+    ? FieldName<V>
+    : FieldName<T>;
 
-type FieldName = string & {
+const fieldTypeBrand: unique symbol = Symbol();
+
+export interface FieldName<T> {
     [Symbol.toPrimitive]: () => string;
+    [fieldTypeBrand]: T
     toString(): string;
     valueOf(): string;
 };
 
-type Field<T> = {
+export type Field<T> = {
     [K in keyof T]: T[K] extends unknown[]
         ? T[K][number] extends FormDataEntryValue
-            ? (index?: number) => FieldName
+            ? (index?: number) => FieldName<T[K][number]>
+            : T[K][number] extends FieldName<infer V>
+            ? (index?: number) => FieldName<V>
             : (index: number) => Field<T[K][number]>
         : T[K] extends FormDataEntryValue
-        ? FieldName
+        ? FieldName<T[K]>
+        : T[K] extends FieldName<infer V>
+        ? FieldName<V>
         : Field<T[K]>;
 };
 
@@ -30,7 +39,7 @@ type DeepRequired<T> = T extends Array<infer U>
       }
     : Exclude<T, undefined | null>;
 
-type Fields<T> = Field<ReplaceValue<DeepRequired<T>, FieldName>>;
+type Fields<T> = Field<ReplaceValue<DeepRequired<T>>>;
 
 export function fields<T>(): Fields<T> {
     return new Proxy(

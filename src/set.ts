@@ -25,6 +25,7 @@ export function set(obj: any, path: string, value: unknown) {
 type ParsedSegment =
     | { type: 'key'; key: string }
     | { type: 'index'; key: number };
+
 function parsePath(str: string) {
     const parsed: ParsedSegment[] = [];
 
