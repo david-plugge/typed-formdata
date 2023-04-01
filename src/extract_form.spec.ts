@@ -31,3 +31,18 @@ test('extractFormData', () => {
     expect(files.object).toBe(undefined);
     expect(files.array[0]).toBeInstanceOf(Blob);
 });
+
+test('extractFormData with codecs', () => {
+    const formdata = new FormData();
+
+    formdata.set('name:string', 'name');
+    formdata.set('age:number', '90');
+    formdata.set('active:boolean', 'on');
+
+    const { data, fields, files } = extractFormData(formdata);
+
+    expect(data.name).toBe('name');
+    expect(data.age).toBe(90);
+    expect(data.active).toBe(true);
+
+})
